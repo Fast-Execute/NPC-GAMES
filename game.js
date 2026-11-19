@@ -297,8 +297,6 @@ function ageNpc(n) {
     n.life="deceased";
     const heir=n.children.map(id=>npcs.find(x=>x.id===id && x.alive)).find(Boolean) || (n.partnerId ? npcs.find(x=>x.id===n.partnerId && x.alive) : null);
     if(heir) { heir.wealth=(heir.wealth||0)+(n.wealth||0); if(n.property!=="none") heir.property=n.property; civilization.inheritedEstates++; addCivilizationRecord(`${heir.name} inherited the estate of ${n.name}.`); }
-    const heir=n.children.map(id=>npcs.find(x=>x.id===id && x.alive)).find(Boolean) || (n.partnerId ? npcs.find(x=>x.id===n.partnerId && x.alive) : null);
-    if(heir) { heir.wealth=(heir.wealth||0)+(n.wealth||0); if(n.property!=="none") heir.property=n.property; civilization.inheritedEstates++; addCivilizationRecord(`${heir.name} inherited the estate of ${n.name}.`); }
     const remembrance=`${n.name}, who lived to age ${n.age}, has died. Their stories remain.`;
     npcs.filter(x=>x.alive).forEach(other=>other.memory.push({text:remembrance,source:"COMMUNITY"}));
     addFeed(`<b>DEATH:</b> ${n.name} has died at age ${n.age}. Their family and community remember them.`);
