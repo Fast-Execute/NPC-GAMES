@@ -28,10 +28,11 @@ This is a greybox foundation. Capsules and cubes are temporary placeholders, not
 1. Install Unity Hub and a Unity 6 LTS editor with Windows Build Support.
 2. Create a new **3D Core** project.
 3. Copy this repository's Assets folder into the Unity project's root.
-4. Open or create an empty scene.
-5. Create an empty GameObject named NPC-GAMES Bootstrap.
-6. Add the NpcGames3DBootstrap component.
-7. Press Play. The settlement and player are created automatically.
+4. Open the project and wait for Unity to finish importing the Assets folder.
+5. Select **NPC-GAMES → Build First Playable Scene** from the Unity menu. This creates and saves `Assets/Scenes/NPC-GAMES-First-Playable.unity`, attaches the bootstrap component and adds the scene to Build Settings.
+6. Press Play. The settlement and player are created automatically.
+
+The repository currently supplies the Unity `Assets` source folder rather than a complete Unity project shell. Create a Unity 6 LTS 3D Core project first, then copy the repository's `Assets` folder into that project. Unity will generate its own `ProjectSettings`, package manifest and asset metadata on first import.
 
 The scripts use Unity's built-in Input axes. If the project is configured for the new Input System only, set **Active Input Handling** to **Both** or **Input Manager (Old)** in Player settings, then restart the editor.
 

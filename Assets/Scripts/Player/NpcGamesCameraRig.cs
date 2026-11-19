@@ -10,7 +10,7 @@ namespace NPCGames {
    if(Input.GetMouseButtonDown(0)){Cursor.lockState=CursorLockMode.Locked;Cursor.visible=false;}
    if(Cursor.lockState==CursorLockMode.Locked){yaw+=Input.GetAxis("Mouse X")*sensitivity*3f;pitch-=Input.GetAxis("Mouse Y")*sensitivity*2f;pitch=Mathf.Clamp(pitch,-12,55);}
    Quaternion r=Quaternion.Euler(pitch,yaw,0);Vector3 focus=target.position+Vector3.up*height;Vector3 desired=focus-r*Vector3.forward*distance;
-   Vector3 ray=desired-focus; if(Physics.SphereCast(focus,.22f,ray.normalized,out RaycastHit hit,distance,~(1<<target.gameObject.layer)))desired=hit.point+hit.normal*.25f;
+   Vector3 ray=desired-focus; if(Physics.SphereCast(focus,.22f,ray.normalized,out RaycastHit hit,distance))desired=hit.point+hit.normal*.25f;
    transform.position=desired;transform.rotation=Quaternion.LookRotation(focus-transform.position,Vector3.up);
   }
  }
