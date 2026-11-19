@@ -229,7 +229,7 @@ function lifeStage(age) {
   return "very old";
 }
 
-function createDescendant(parent) {
+function createDescendant(parent, coParent=null) {
   const names=["Amari","Tariro","Imani","Kito","Lerato","Neo","Palesa","Thando","Zola","Mosi"];
   const child={
     id:world.nextNpcId++,
@@ -265,15 +265,15 @@ function ageNpc(n) {
   if(n.age>=82 && Math.random()<.18) {
     n.alive=false;
     n.life="deceased";
-    const remembrance=`${n.name}, who lived to age ${n.age}, has died. Their stories remain.`;
+    const heir=n.children.map(id=>npcs.find(x=>x.id===id && x.alive)).find(Boolean) || (n.partnerId ? npcs.find(x=>x.id===n.partnerId && x.alive) : null);\n    if(heir) { heir.wealth=(heir.wealth||0)+(n.wealth||0); if(n.property!=="none") heir.property=n.property; civilization.inheritedEstates++; addCivilizationRecord(`${heir.name} inherited the estate of ${n.name}.`); }\n    const remembrance=`${n.name}, who lived to age ${n.age}, has died. Their stories remain.`;
     npcs.filter(x=>x.alive).forEach(other=>other.memory.push({text:remembrance,source:"COMMUNITY"}));
     addFeed(`<b>DEATH:</b> ${n.name} has died at age ${n.age}. Their family and community remember them.`);
     return;
   }
-  if(n.age>=20 && n.age<=45 && n.children.length===0 && Math.random()<.035) createDescendant(n);
+  if(n.age>=5 && n.age<=17) { n.institution="school"; n.education=Math.min(5,(n.education||0)+0.35); n.knowledge=Math.min(100,n.knowledge+1); }\n  if(n.age>=18 && n.age<70) { n.wealth=(n.wealth||0)+Math.max(1,Math.round((n.knowledge||10)/25)); }\n  if(n.age>=20 && n.age<=45 && n.partnerId===null && Math.random()<.012) { const possible=npcs.find(x=>x.id!==n.id && x.alive && x.age>=20 && x.age<=45 && x.partnerId===null && x.family!==n.family); if(possible) formPartnership(n,possible); }\n  if(n.partnerId && n.age>=20 && n.age<=42 && n.children.length<3 && Math.random()<.045) { const co=npcs.find(x=>x.id===n.partnerId && x.alive); if(co && co.age>=20 && co.age<=45) createDescendant(n,co); }
 }
 
-function advanceGenerationYear() {
+function addCivilizationRecord(message) {\n  civilization.ledger.unshift(message); civilization.ledger=civilization.ledger.slice(0,12);\n}\n\nfunction formPartnership(a,b) {\n  if(!a || !b || !a.alive || !b.alive || a.partnerId || b.partnerId) return;\n  a.partnerId=b.id; b.partnerId=a.id;\n  const household=a.household; b.household=household; b.family=a.family;\n  a.links.push(b.id); b.links.push(a.id); civilization.partnerships++; civilization.households.add(household);\n  addCivilizationRecord(`${a.name} and ${b.name} formed a household partnership.`);\n  addFeed(`<b>PARTNERSHIP:</b> ${a.name} and ${b.name} formed a household.`);\n}\n\nfunction renderCivilization() {\n  const set=(id,value)=>{const el=document.querySelector(id);if(el)el.textContent=value;};\n  const living=npcs.filter(n=>n.alive);\n  set("#householdCount",new Set(living.map(n=>n.household)).size);\n  set("#partnershipCount",living.filter(n=>n.partnerId && n.id<n.partnerId).length);\n  set("#studentCount",living.filter(n=>n.age>=5 && n.age<18).length);\n  set("#workerCount",living.filter(n=>n.age>=18 && n.age<70).length);\n  set("#wealthCount",living.reduce((sum,n)=>sum+(n.wealth||0),0));\n  set("#inheritanceCount",civilization.inheritedEstates);\n  const list=document.querySelector("#institutionList");\n  if(list) list.innerHTML=institutions.map(i=>`<div class="institution"><span>${i.name}</span><strong>${i.members.filter(id=>{const n=npcs.find(x=>x.id===id);return n&&n.alive;}).length} members</strong></div>`).join("");\n  const feed=document.querySelector("#civilizationFeed");\n  if(feed) feed.innerHTML=civilization.ledger.map(x=>`<div class="civ-record">${escapeHtml(x)}</div>`).join("") || "<div class=\\"civ-record\\">Civilization records will appear as society develops.</div>";\n}\n\nfunction advanceGenerationYear() {
   world.year++;
   const living=[...npcs].filter(n=>n.alive);
   living.forEach(ageNpc);
