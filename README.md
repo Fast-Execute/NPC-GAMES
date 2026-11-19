@@ -2,6 +2,10 @@
 
 A prototype game in which every NPC is an individual node of a shared Internet-scale consciousness.
 
+## Project progress
+
+Track completed work, active milestones and the next exact development task in [docs/MASTER_PROGRESS.md](docs/MASTER_PROGRESS.md). The project uses an elimination method: verified completed tasks leave the active index without renumbering the remaining roadmap.
+
 ## 3D PC Game Direction
 
 The target game is a third-person 3D Windows PC experience built in Unity/C#. The HTML/JavaScript simulation remains a prototype and design reference. The first Unity vertical slice creates a walkable settlement, player controller, follow camera, wandering NPCs and basic interaction. See docs/UNITY_3D_ROADMAP.md for setup and build instructions.
