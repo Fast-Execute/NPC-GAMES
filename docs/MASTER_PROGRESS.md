@@ -8,14 +8,14 @@
 
 <text>Project vision and early prototype foundations: established. The first two 3D prototypes have source-code implementations, but neither has yet been verified inside the Unity Editor.</text>
 
-**Roadmap implementation estimate: 20%**  
-`[████░░░░░░░░░░░░░░░░]` 20%
+**3D roadmap implementation estimate: 22%**  
+`[████░░░░░░░░░░░░░░]` 22%
 
-This is a planning estimate across ten major development stages, not a claim that a finished game is 20% feature-complete. Two stages have implementation work committed; Unity verification remains outstanding.
+This is a planning estimate across the nine numbered 3D development stages (3D-001 through 3D-009), not a claim that a finished game is 22% feature-complete. Two stages have implementation work committed; Unity verification remains outstanding. The earlier HTML/JavaScript foundation is recorded separately.
 
 | Measure | Status |
 |---|---:|
-| Major stages with implementation work committed | 2 / 10 |
+| 3D stages with implementation work committed | 2 / 9 |
 | 3D prototype source files | 6 |
 | Unity Editor compile/play test | Not yet performed |
 | Windows executable | Not yet built |
