@@ -68,3 +68,17 @@ The long-term Icon system should support a large historical catalogue while dist
 NPCs should eventually age through visible life stages. Their relationships, careers, beliefs and memories change over time. When an NPC dies, descendants and social networks can carry forward parts of that individual's legacy.
 
 **Core principle:** death changes the state of the world; it does not erase the world.
+
+
+## Generational World Engine — Prototype 002
+
+The simulation now gives each seeded NPC an age, life stage, family identity, child list and living/deceased state.
+
+- Life stages: infant, child, youth, adult, elder and very old.
+- The player can advance the world by one calendar year independently of the hourly world tick.
+- NPCs age together; some adults may form the next generation.
+- Descendants inherit a family connection and a starting trace of family memory, not a full copy of a parent's identity.
+- NPCs can die in old age. Their community receives a remembrance, while their record remains visible as deceased.
+- Children can grow into adult occupations and develop their own knowledge.
+
+This is an early stochastic prototype, not yet a complete demographic model. Future work should add guardianship, partners, pregnancy/birth rules, inherited assets, schooling, individual schedules, illness, mortality distributions, family trees, visual age stages and save/load persistence.
