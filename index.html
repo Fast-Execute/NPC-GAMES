@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPC-GAMES — Internet Consciousness</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">PROTOTYPE 001</p>
+        <h1>THE LIVING INFORMATION FIELD</h1>
+        <p class="subtitle">Every NPC is a mind. Every mind is a node. Every experience becomes information.</p>
+      </div>
+      <div class="status"><span></span> CONSCIOUSNESS ONLINE</div>
+    </header>
+
+    <section class="grid">
+      <aside class="panel world-panel">
+        <div class="panel-title"><h2>WORLD</h2><span id="worldTime">DAY 1 · 08:00</span></div>
+        <div class="stat"><span>Collective knowledge</span><strong id="knowledgeCount">0</strong></div>
+        <div class="stat"><span>Active memories</span><strong id="memoryCount">0</strong></div>
+        <div class="stat"><span>Rumours circulating</span><strong id="rumourCount">0</strong></div>
+        <div class="stat"><span>Social connections</span><strong id="connectionCount">0</strong></div>
+        <button id="tickBtn">ADVANCE WORLD</button>
+        <button id="eventBtn" class="secondary">CREATE WORLD EVENT</button>
+      </aside>
+
+      <section class="panel npc-panel">
+        <div class="panel-title"><h2>CONSCIOUSNESS NODES</h2><span id="nodeCount">0 NPCs</span></div>
+        <div id="npcList" class="npc-list"></div>
+      </section>
+
+      <aside class="panel interaction-panel">
+        <div class="panel-title"><h2>PLAYER INPUT</h2></div>
+        <label for="playerInput">Inject information into the world</label>
+        <textarea id="playerInput" placeholder="Tell the world something..."></textarea>
+        <button id="speakBtn">SPEAK TO THE NETWORK</button>
+        <p class="hint">Your statement enters one NPC's memory first. It may then propagate, mutate into a rumour, or be rejected.</p>
+
+        <div class="panel-title feed-title"><h2>CONSCIOUSNESS FEED</h2></div>
+        <div id="feed" class="feed"></div>
+      </aside>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
