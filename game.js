@@ -123,3 +123,95 @@ document.querySelector("#speakBtn").onclick=playerSpeak;
 document.querySelector("#eventBtn").onclick=worldEvent;
 document.querySelector("#tickBtn").onclick=tick;
 render();
+
+
+// LIFE ENGINE + MEETING ICONS
+const icons = [
+  {id:"crowley",name:"Aleister Crowley",era:"1875–1947",style:"provocative, mystical, theatrical",idea:"individual will, occult philosophy, disciplined practice"},
+  {id:"curie",name:"Marie Curie",era:"1867–1934",style:"precise, calm, scientific",idea:"evidence, persistence, discovery"},
+  {id:"einstein",name:"Albert Einstein",era:"1879–1955",style:"playful, reflective, conceptual",idea:"thought experiments, relativity, curiosity"},
+  {id:"socrates",name:"Socrates",era:"c. 470–399 BC",style:"questioning, ironic, patient",idea:"examining assumptions through dialogue"},
+  {id:"tesla",name:"Nikola Tesla",era:"1856–1943",style:"visionary, intense, inventive",idea:"invention, electricity, imagination"}
+];
+
+const player = {
+  name:"Sello", age:18, generation:1, alive:true, legacy:[], pastMemories:[],
+  skills:["curiosity"], beliefs:[], meetingCount:0
+};
+
+function renderLife() {
+  const state=document.querySelector("#lifeState");
+  if(!state) return;
+  state.textContent=player.alive?"ALIVE":"LIFE COMPLETE";
+  document.querySelector("#lifeMeta").textContent=`Age ${player.age} · Generation ${player.generation}`;
+  document.querySelector("#lifeMeter").style.width=`${Math.min(100,(player.age/100)*100)}%`;
+  document.querySelector("#legacyCount").textContent=player.legacy.length;
+  document.querySelector("#pastMemoryCount").textContent=player.pastMemories.length;
+  document.querySelector("#playerName").textContent=player.name;
+}
+
+function renderIcons() {
+  const el=document.querySelector("#iconList");
+  if(!el) return;
+  el.innerHTML=icons.map(icon=>`<button class="icon-card" data-icon="${icon.id}">
+    <strong>${icon.name}</strong><small>${icon.era}</small><span>${icon.style}</span>
+  </button>`).join("");
+  document.querySelectorAll(".icon-card").forEach(b=>b.onclick=()=>meetIcon(b.dataset.icon));
+}
+
+function meetIcon(id) {
+  const icon=icons.find(x=>x.id===id);
+  if(!icon || !player.alive) return;
+  player.meetingCount++;
+  const openings=[
+    `“You have come with a question. Good. Questions are more useful than comfortable answers.”`,
+    `“Observe carefully. The world changes when the observer changes.”`,
+    `“Do not borrow a conclusion merely because it sounds beautiful.”`,
+    `“Your life is brief. Your experiments need not be.”`
+  ];
+  const voice=openings[(player.age+player.meetingCount+icon.name.length)%openings.length];
+  player.pastMemories.push(`Met ${icon.name}: ${icon.idea}.`);
+  player.legacy.push(`A lesson associated with ${icon.name}.`);
+  player.beliefs.push(icon.idea);
+  addFeed(`<b>MEETING ICON — ${icon.name}:</b> ${voice}`);
+  addFeed(`<b>ICON MEMORY:</b> You encountered an historical simulation of ${icon.name}. Your interpretation becomes part of your life history.`);
+  renderLife();
+}
+
+function agePlayer() {
+  if(!player.alive) return;
+  player.age++;
+  if(player.age%5===0) player.skills.push(["patience","craft","memory","leadership"][Math.floor(Math.random()*4)]);
+  if(player.age>=100) diePlayer("Your body reached the end of its natural simulated lifespan.");
+  else addFeed(`<b>LIFE:</b> ${player.name} is now ${player.age}. The world remembers another year.`);
+  renderLife();
+}
+
+function diePlayer(reason) {
+  if(!player.alive) return;
+  player.alive=false;
+  player.legacy.push(`Generation ${player.generation} ended at age ${player.age}.`);
+  npcs.forEach(n=>n.memory.push({text:`${player.name} died at age ${player.age}. Their legacy survives.`,source:"LIFE"}));
+  addFeed(`<b>DEATH:</b> ${reason}`);
+  addFeed(`<b>LEGACY:</b> The NPC network now carries memories of ${player.name}'s life.`);
+  renderLife();
+  setTimeout(reincarnate,500);
+}
+
+function reincarnate() {
+  player.generation++;
+  player.age=0;
+  player.alive=true;
+  const names=["Sello","Mara","Tebo","Nia","Kade","Luma"];
+  player.name=names[Math.floor(Math.random()*names.length)];
+  player.pastMemories=player.pastMemories.slice(-3);
+  player.skills=player.skills.slice(-3);
+  addFeed(`<b>REINCARNATION:</b> A new life has begun — Generation ${player.generation}. Some memories survived the transition.`);
+  addFeed(`<b>NEW NODE:</b> ${player.name} begins life with fragments of a previous existence, not a complete memory.`);
+  renderLife();
+}
+
+document.querySelector("#ageBtn").onclick=agePlayer;
+document.querySelector("#deathBtn").onclick=()=>diePlayer("The player chose to end this life.");
+renderIcons();
+renderLife();
