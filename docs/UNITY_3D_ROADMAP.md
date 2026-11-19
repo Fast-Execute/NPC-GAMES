@@ -56,6 +56,16 @@ The scripts use Unity's built-in Input axes. If the project is configured for th
 - A death should alter families, relationships and inheritance without deleting the world's history.
 - The first 3D prototype uses placeholder geometry and simple wandering. It does not yet include NavMesh pathfinding, animation rigs, saving, multiplayer, procedural terrain or the full JavaScript civilization simulation.
 
+## Prototype 3D-002 — Living settlement systems
+- Camera-relative player movement: character turns toward the direction of travel.
+- Third-person camera collision to reduce clipping through walls and props.
+- Accelerated 24-hour world clock with sun angle, daylight, ambient light and fog changes.
+- NPC daily routine destinations: home in the early morning and evening, work during the day, and the public square after work.
+- NPC personality-specific conversation responses, simple trust changes and a short interaction memory.
+- Roads, tree clusters and street lamps add spatial landmarks to the settlement.
+
+This is still a greybox simulation: NPC movement uses simple steering, not Unity NavMesh; buildings are not enterable; NPC schedules and memories are local runtime state and are not saved yet.
+
 ## Next milestones
 1. Replace capsules with rigged characters, animation controller and expressive idle/walk/run states.
 2. Add terrain, roads, interiors, doors, interactable objects and day/night cycle.
