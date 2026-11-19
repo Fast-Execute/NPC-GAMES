@@ -39,10 +39,12 @@ function render() {
   document.querySelector("#rumourCount").textContent = world.rumours.length;
   document.querySelector("#connectionCount").textContent = npcs.reduce((a,n)=>a+n.links.length,0)/2;
   document.querySelector("#worldTime").textContent = `DAY ${world.day} · ${String(world.hour).padStart(2,"0")}:00`;
+  const yearDisplay=document.querySelector("#worldYear");
+  if(yearDisplay) yearDisplay.textContent=world.year;
   document.querySelector("#npcList").innerHTML = npcs.map(n => `
-    <article class="npc" data-id="${n.id}">
+    <article class="npc ${n.alive===false?"deceased":""}" data-id="${n.id}">
       <div class="npc-top"><span class="npc-name">${n.name}</span><span class="npc-state">${n.trait}</span></div>
-      <div class="npc-role">${n.role} · Age ${n.age} · ${n.life} · ${n.memory.length} memories</div>
+      <div class="npc-role">${n.role} · Age ${n.age} · ${n.life} · ${n.alive===false?"deceased":n.memory.length+" memories"}</div>
       <div class="meter"><i style="width:${Math.min(100,n.knowledge)}%"></i></div>
     </article>`).join("");
   document.querySelectorAll(".npc").forEach(el => el.onclick=()=>inspect(Number(el.dataset.id)));
