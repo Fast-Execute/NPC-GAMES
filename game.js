@@ -333,7 +333,7 @@ function renderCivilization() {
   const list=document.querySelector("#institutionList");
   if(list) list.innerHTML=institutions.map(i=>`<div class="institution"><span>${i.name}</span><strong>${i.members.filter(id=>{const n=npcs.find(x=>x.id===id);return n&&n.alive;}).length} members</strong></div>`).join("");
   const feed=document.querySelector("#civilizationFeed");
-  if(feed) feed.innerHTML=civilization.ledger.map(x=>`<div class="civ-record">${escapeHtml(x)}</div>`).join("") || "<div class=\\"civ-record\\">Civilization records will appear as society develops.</div>";
+  if(feed) feed.innerHTML=civilization.ledger.map(x=>`<div class="civ-record">${escapeHtml(x)}</div>`).join("") || '<div class="civ-record">Civilization records will appear as society develops.</div>';
 }
 
 function advanceGenerationYear() {
