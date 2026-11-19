@@ -36,3 +36,35 @@ The important design rule is that information is not copied perfectly. Personali
 ## Design principle
 
 **NPCs should not know what the game designer knows. They should know what their experience and information network gives them.**
+
+
+## Life, Death and Reincarnation
+
+The player is a persistent consciousness node rather than a disposable avatar.
+
+**Life cycle:** birth -> aging -> relationships -> experience -> death -> legacy -> reincarnation.
+
+Death does not reset the simulation. NPCs retain memories of the deceased player, possessions and discoveries can enter the world, and the next incarnation begins with only fragments of previous-life memory.
+
+The reincarnation system deliberately avoids perfect memory transfer. This creates mystery, continuity and emergent interpretation.
+
+## Meeting Icons / Training Icons
+
+Historical figures can be represented as bounded historical simulations. The initial prototype includes Aleister Crowley, Marie Curie, Albert Einstein, Socrates and Nikola Tesla.
+
+An Icon has:
+- historical era and knowledge boundary
+- characteristic speech style
+- associated ideas and works
+- contextual worldview
+- encounter history
+
+An NPC or player does not receive the Icon's identity. They receive an **interpretation of an encounter**. Different personalities can therefore leave the same meeting with different beliefs.
+
+The long-term Icon system should support a large historical catalogue while distinguishing historical evidence from fictional dialogue generated for gameplay.
+
+## Generational simulation
+
+NPCs should eventually age through visible life stages. Their relationships, careers, beliefs and memories change over time. When an NPC dies, descendants and social networks can carry forward parts of that individual's legacy.
+
+**Core principle:** death changes the state of the world; it does not erase the world.
