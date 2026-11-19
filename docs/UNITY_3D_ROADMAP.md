@@ -1,5 +1,9 @@
 # NPC-GAMES — 3D PC Game Roadmap
 
+## Progress tracking
+
+See [MASTER_PROGRESS.md](MASTER_PROGRESS.md) for the canonical elimination-based progress index, completed-work register, percentages and next exact task.
+
 ## Product direction
 NPC-GAMES is being developed as a **3D third-person Windows PC game**. The existing HTML/JavaScript build remains a rapid simulation prototype and design reference. The intended playable client is Unity with C#.
 
