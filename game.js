@@ -72,7 +72,9 @@ function render() {
 
 function inspect(id) {
   const n=npcs.find(x=>x.id===id);
-  addFeed(`<b>${n.name}:</b> ${n.role}, ${n.trait}. Trust ${n.trust}%. Recent memory: ${n.memory.at(-1)?.text || "none"}`);
+  if(!n) return;
+  const recentMemory=n.memory.at(-1)?.text || "none";
+  addFeed(`<b>${n.name}:</b> ${n.role}, ${n.trait}. Trust ${n.trust}%. Recent memory: ${escapeHtml(recentMemory)}`);
 }
 
 function mutate(text, npc) {
@@ -103,7 +105,8 @@ function playerSpeak() {
   if(!text) return;
   const origin=npcs[Math.floor(Math.random()*npcs.length)];
   origin.memory.push({text,source:"PLAYER"});
-  world.knowledge.add(...text.toLowerCase().split(/\s+/).filter(w=>w.length>4).slice(0,5));
+  const keywords=text.toLowerCase().split(/\s+/).filter(w=>w.length>4).slice(0,5);
+  keywords.forEach(keyword=>world.knowledge.add(keyword));
   addFeed(`<b>PLAYER → ${origin.name}:</b> “${escapeHtml(text)}”`);
   propagate(origin,text);
   addFeed(`<b>NETWORK:</b> Information is propagating through ${origin.name}'s social links.`);
